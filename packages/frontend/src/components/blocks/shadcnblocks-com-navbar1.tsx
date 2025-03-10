@@ -188,7 +188,7 @@ const Navbar1 = ({
           </div>
           <div className="flex gap-2 items-center">
             <a 
-              href="https://github.com/Polozone/saas-boilerplate" 
+              href="https://github.com/Polozone/saas_boilerplate" 
               target="_blank" 
               rel="noopener noreferrer"
               className="mr-4"
