@@ -1,0 +1,49 @@
+# Étape 1 : Build des dépendances et du code
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Copier uniquement les fichiers essentiels pour optimiser le cache Docker
+COPY package.json yarn.lock ./
+COPY packages/backend ./packages/backend
+COPY packages/api-types ./packages/api-types
+
+# Installer les dépendances avec Yarn Workspaces
+RUN yarn install --frozen-lockfile
+
+# Générer le client Prisma
+RUN yarn prisma generate --schema=./packages/backend/prisma/schema.prisma
+
+# Builder les types de api-types
+RUN yarn workspace @monorepo/api-types build
+
+# Builder le backend
+RUN yarn workspace @waboostr/backend build
+
+RUN ls -la packages/backend/dist
+# Étape 2 : Image de production minimaliste
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+# Copier les fichiers nécessaires
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/packages/backend/dist ./dist
+COPY --from=builder /app/packages/backend/prisma ./prisma
+COPY --from=builder /app/packages/backend/package.json ./packages/backend/package.json
+COPY --from=builder /app/packages/backend/node_modules ./packages/backend/node_modules
+COPY --from=builder /app/packages/api-types/dist ./packages/api-types/dist
+COPY --from=builder /app/packages/api-types/package.json ./packages/api-types/package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/yarn.lock ./yarn.lock
+
+# Installer netcat pour les tests de connexion
+RUN apk add --no-cache netcat-openbsd
+
+# Script de démarrage
+COPY packages/backend/entrypoint.prod.sh /
+RUN chmod +x /entrypoint.prod.sh
+
+EXPOSE 4000
+
+ENTRYPOINT ["/entrypoint.prod.sh"]

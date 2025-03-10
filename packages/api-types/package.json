@@ -1,0 +1,22 @@
+{
+  "name": "@monorepo/api-types",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "peerDependencies": {
+    "@ts-rest/core": "3.52.0",
+    "@ts-rest/nest": "3.52.0"
+  },
+  "devDependencies": {
+    "@ts-rest/core": "3.52.0",
+    "typescript": "^5.7.2"
+  }
+}

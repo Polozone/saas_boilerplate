@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  Admin
+  Member
+  Owner
+}
+
+model UserOrganization {
+  user           User         @relation(fields: [userId], references: [id])
+  userId         String
+  organization   Organization @relation("UserOrganization", fields: [organizationId], references: [id])
+  organizationId String
+  role           Role         @default(Member)
+
+  @@id([userId, organizationId])
+  @@index([organizationId])
+  @@index([userId])
+}
+
+model User {
+  id                  String              @id @default(cuid())
+  email               String              @unique
+  name                String?
+  organizations       UserOrganization[]
+  ownedOrganizations  Organization[]      @relation("OrganizationOwner")
+  ownedProjects       Project[]
+}
+
+model Organization {
+  id        String              @id @default(cuid())
+  name      String              @default("My organization")
+  ownerId   String
+  owner     User                @relation("OrganizationOwner", fields: [ownerId], references: [id])
+  users     UserOrganization[]  @relation("UserOrganization")
+  project   Project             @relation(fields: [projectId], references: [id])
+  projectId String              @unique
+
+  @@unique([id])
+  @@index([ownerId])
+}
+
+model Project {
+  id              String                  @id @default(cuid())
+  name            String                  @default("My project")
+  organizationId  String?                  
+  organization    Organization?            
+  ownerId         String
+  owner           User                    @relation(fields: [ownerId], references: [id])
+
+  @@unique([id])
+}

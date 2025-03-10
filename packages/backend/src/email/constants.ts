@@ -1,0 +1,1 @@
+export const EMAIL_PROVIDER = "saas@paulmulin.fr";

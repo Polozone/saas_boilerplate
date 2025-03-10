@@ -1,0 +1,17 @@
+{
+  "name": "waboostr",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start:frontend": "yarn workspace @waboostr/frontend start",
+    "start:backend": "yarn workspace @waboostr/backend start",
+    "build:frontend": "yarn workspace @waboostr/frontend build",
+    "build:backend": "yarn workspace @waboostr/backend build"
+  },
+  "resolutions": {
+    "@ts-rest/core": "^3.52.0",
+    "@ts-rest/nest": "^3.52.0"
+  }
+}

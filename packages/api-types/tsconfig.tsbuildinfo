@@ -1,0 +1,1 @@
+{"root":["./src/contract.ts","./src/index.ts","./src/contracts/auth.contract.ts","./src/contracts/organization.contract.ts","./src/contracts/project.contract.ts","./src/contracts/user.contract.ts","./src/types/organization/organization.type.ts","./src/types/project/project.type.ts","./src/types/user/user.type.ts"],"version":"5.7.2"}
