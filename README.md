@@ -2,6 +2,8 @@
 
 To run the project :
 
+yarn install
+
 docker-compose build
 
 docker-compose up -d
