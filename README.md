@@ -1,6 +1,6 @@
 # saas_boilerplate
 
-To run the project in dev:
+__To run the project in dev__:
 
 ``yarn install``
 
@@ -11,15 +11,15 @@ To run the project in dev:
 if you just cloned the project: 
 ``docker exec -ti nodejs_backend "yarn prisma db push"`` >> will create the db if not exist (from schema.prisma), and generate your Prisma Client
 
-To run the project in prod:
+__To run the project in prod__: 
 If you want to easily deploy the repository through coolify (Vercel like, but free & open source)
 
-1. Get a VPS (you need to match Coolify requirements for RAM & CPU)
-1.1 Get a domain-name (optional)
+1. Get a VPS (you need to match Coolify requirements for RAM & CPU)  
+1.1 Get a domain-name (optional)  
 1.2 Redirect your domain-name to your VPS (optional)
-2. Install Coolify on your VPS. Setup a localhost project and link your github repository from the coolify dashboard UI
-3. Set all environment variables through coolify dashboard UI (see list below, note that you will have to create a Brevo account for that)
-4. (this step is only required if you followed step 1.1 and 1.2 ):
+3. Install Coolify on your VPS. Setup a localhost project and link your github repository from the coolify dashboard UI
+4. Set all environment variables through coolify dashboard UI (see list below, note that you will have to create a Brevo account for that)
+5. (this step is only required if you followed step 1.1 and 1.2 ):
 Connect to your VPS (through SSH or coolify dashboard UI) and setup the proxy. (Coolify use traefik)
 To do that (from coolify dashboard UI) go to: server > localhost > terminal
 
