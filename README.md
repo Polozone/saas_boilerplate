@@ -23,8 +23,10 @@ If you want to easily deploy the repository through coolify (Vercel like, but fr
 Connect to your VPS (through SSH or coolify dashboard UI) and setup the proxy. (Coolify use traefik)
 To do that (from coolify dashboard UI) go to: server > localhost > terminal
 
-cd /data/coolify/proxy/dynamic
-nano dynamic_conf.yml
+``cd /data/coolify/proxy/dynamic``
+
+``nano dynamic_conf.yml``
+
 Here is my config, for example :
 __________________________________________________________________________________
 ````
