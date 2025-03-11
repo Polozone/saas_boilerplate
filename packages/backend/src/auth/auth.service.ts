@@ -172,7 +172,7 @@ export class AuthService {
     
     async generateAccessToken(payload: { sub: string, email: string }) {
         return this.jwtService.signAsync(payload, { 
-            expiresIn: process.env.ACCESS_TOKEN_DURATION_IN_MINUTES,
+            expiresIn: process.env.ACCESS_TOKEN_DURATION,
             secret: process.env.JWT_SECRET 
         });
     }
