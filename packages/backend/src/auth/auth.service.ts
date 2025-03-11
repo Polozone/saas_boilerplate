@@ -24,9 +24,6 @@ export class AuthService {
             throw new UnauthorizedException("Invalid or missing refresh_token");
         }
         if (verifyRefreshToken){
-            // we also want to check if the access_token is valid, if yes, 
-            // we dont generate a new one. This check disallow the user to 
-            // create an infinity of access_token with only one valid refresh token
             try {
                 const verifyAccessToken = await this.jwtService.verifyAsync(accessToken, { secret: process.env.JWT_SECRET });
             } catch (e){
@@ -35,9 +32,9 @@ export class AuthService {
                     email: verifyRefreshToken.email,
                 });
                 res.cookie('access_token', access_token, {
-                    httpOnly: true,    // Empêche l'accès au token par JavaScript (coté-client)
-                    secure: true,      // Nécessite HTTPS (à désactiver en local)
-                    sameSite: 'strict' // Empêche l'envoi cross-site (sécurise contre CSRF)
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'strict'
                 });
             }
         }
@@ -74,12 +71,9 @@ export class AuthService {
             throw new ConflictException("Email is already registered");
         }
 
-        // const hashPassword = await argon.hash(body.password);
-
         await this.prisma.user.create({
             data: {
                 email: body.email,
-                // password: hashPassword,
             }
         })
     }
@@ -87,34 +81,27 @@ export class AuthService {
     async signin(authDto: AuthDto, res) {
         const user = await this.userService.getUserWithEmailOrThrow(authDto.email);
 
-        // const verify = await argon.verify(user.password, authDto.password);
-
-        // if (!verify) throw new NotFoundException("wrong password");
-
-        // delete user.password;
-
         const payload = { sub: user.id, email: user.email };
 
         const access_token = await this.generateAccessToken(payload);
 
         res.cookie('access_token', access_token, {
-			httpOnly: true,    // Empêche l'accès au token par JavaScript
-			secure: true,      // Nécessite HTTPS (à désactiver en local)
-			sameSite: 'strict' // Empêche l'envoi cross-site (sécurise contre CSRF)
+			httpOnly: true,
+			secure: true,
+			sameSite: 'strict'
 		});
 
         const refresh_token = await this.generateRefreshToken(payload);
 
         res.cookie('refresh_token', refresh_token, {
-			httpOnly: true,    // Empêche l'accès au token par JavaScript
-			secure: true,      // Nécessite HTTPS (à désactiver en local)
-			sameSite: 'strict' // Empêche l'envoi cross-site (sécurise contre CSRF)
+			httpOnly: true,
+			secure: true,
+			sameSite: 'strict'
 		});
 		return res.json({ success: true, message: "User signed in successfully" });
     }
 
     async getOrCreateUserWithEmail(authDto: AuthDto): Promise<User> {
-        console.log("authDto", authDto);
         const user = await this.prisma.user.upsert({
             where: {
                 email: authDto.email
@@ -123,7 +110,7 @@ export class AuthService {
                 email: authDto.email,
             }
         })
-        console.log("user", user);
+        console.log("user created:", user);
         return user;
     }
 
@@ -171,6 +158,7 @@ export class AuthService {
     }
     
     async generateAccessToken(payload: { sub: string, email: string }) {
+        console.log("access_token_duration:", process.env.ACCESS_TOKEN_DURATION);
         return this.jwtService.signAsync(payload, { 
             expiresIn: process.env.ACCESS_TOKEN_DURATION,
             secret: process.env.JWT_SECRET 
@@ -178,8 +166,9 @@ export class AuthService {
     }
 
     async generateRefreshToken(payload: { sub: string, email: string }) {
+        console.log("refresh_token_duration:", process.env.REFRESH_TOKEN_DURATION);
         return this.jwtService.signAsync(payload, { 
-            expiresIn: process.env.REFRESH_TOKEN_DURATION_IN_DAYS,
+            expiresIn: process.env.REFRESH_TOKEN_DURATION,
             secret: process.env.JWT_REFRESH_SECRET 
         });
     }
