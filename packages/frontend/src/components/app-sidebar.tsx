@@ -28,7 +28,7 @@ import { useProjectStore } from "@/app/dashboard/projects/useStore";
 const data = {
   user: {
     name: "shadcn",
-    email: "demo@waboostr.com",
+    email: "demo@paulmulin.fr",
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
@@ -37,16 +37,16 @@ const data = {
       logo: GalleryVerticalEnd,
       plan: "Enterprise",
     },
-    {
-      name: "Waboostr Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
+    // {
+    //   name: "Waboostr Corp.",
+    //   logo: AudioWaveform,
+    //   plan: "Startup",
+    // },
+    // {
+    //   name: "Evil Corp.",
+    //   logo: Command,
+    //   plan: "Free",
+    // },
   ],
   navMain: [
     // {
