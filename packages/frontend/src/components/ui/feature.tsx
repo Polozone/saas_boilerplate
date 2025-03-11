@@ -1,38 +1,38 @@
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
-import { Cloud, Lock, ShieldCheck, UsersRound, Fingerprint, Container, Mail } from "lucide-react";
+import { Cloud, Lock, ShieldCheck, UsersRound, Fingerprint, Container, Mail, Terminal } from "lucide-react";
 
 export function FeaturesSectionWithHoverEffects() {
   const features = [
     {
       title: 'Push-to-deploy',
       description:
-        'Easily deploy your SaaS through a coolify instance in localhost with the docker-compose.prod.yml file and git-push to deploy in production.',
+        'Easily deploy your SaaS/MVP through a coolify instance with the docker-compose.prod.yml file and git-push to deploy in prod. All you need is a cheap VPS.',
       icon: Cloud,
     },
     {
       title: 'Typesafe API',
       description:
-        'Boost your productivity with a typesafe API that run under ts-rest. Shared bundle with frontend & backend. No more API errors, no more guessing.',
+        'Boost your productivity with a typesafe API that run under ts-rest. Shared types with frontend & backend. No more API errors, no more guessing.',
       icon: Lock,
     },
     {
       title: 'Authentication',
       description:
-        'Built-in authentication is already implemented with Passport.js. Allow your users to signin with a simple magic-link.',
+        'Built-in authentication is already implemented with Passport.js. Your users can already signin with a simple magic-link.',
       icon: ShieldCheck,
     },
     {
       title: 'Organizations',
       description:
-        'Users can create organizations and invite other users to join them. Focus yourself on your real business-logic.',
+        'Users can create project(s) and invite other users to join them. Focus yourself on your real business-logic.',
       icon: UsersRound,
     },
     {
       title: 'Shadcn-CLI',
       description:
         'Use shadcn-CLI to generate components. No more copy-pasting components from shadcn-ui website.',
-      icon: Fingerprint,
+      icon: Terminal,
     },
     {
       title: 'Docker-compose',

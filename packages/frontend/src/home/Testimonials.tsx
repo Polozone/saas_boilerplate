@@ -17,7 +17,7 @@ const testimonials = [
       handle: "@emmaai",
       avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
     },
-    text: "Using this AI platform has transformed how we handle data analysis. The speed and accuracy are unprecedented.",
+    text: "Using this starter-kit made me deploy my MVP in a day.",
     href: "https://www.linkedin.com/in/paul-mulin/"
   },
   {
@@ -26,7 +26,7 @@ const testimonials = [
       handle: "@davidtech",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
     },
-    text: "The API integration is flawless. We've reduced our development time by 60% since implementing this solution.",
+    text: "I liked the solution, especially the ability to deploy through coolify really easily.",
     href: "https://www.linkedin.com/in/paul-mulin/"
   },
   {
@@ -35,7 +35,7 @@ const testimonials = [
       handle: "@sofiaml",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
     },
-    text: "Finally, an AI tool that actually understands context! The accuracy in natural language processing is impressive.",
+    text: "If you want to launch a MVP to test a feature for your users, ",
     href: "https://www.linkedin.com/in/paul-mulin/"
   },
   {
@@ -52,7 +52,7 @@ const testimonials = [
 export function TestimonialsSectionDemo() {
   return (
     <TestimonialsSection
-      title="Trusted by developers worldwide"
+      title="Trusted by developers"
       description="Join thousands of developers who are already building their future SaaS with this boilerplate"
       testimonials={testimonials}
     />
