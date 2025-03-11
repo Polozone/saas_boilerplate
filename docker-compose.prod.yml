@@ -2,22 +2,12 @@ version: "3.8"
 
 services:
   backend:
-    # env_file:
-    #   - .env
     build:
-      # On utilise la racine du monorepo comme contexte
       context: .
-      # Le Dockerfile se trouve dans le dossier du backend
       dockerfile: packages/backend/Dockerfile.prod
     container_name: nodejs_backend
     ports:
       - "4000:4000"
-    # environment:
-    #   - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgresql_database:5432/${POSTGRES_DB}
-    #   - PORT=${BACKEND_PORT}
-    #   - NODE_ENV=production
-    #   - FRONTEND_URL=${FRONTEND_URL}
-      # Optionnel : plusieurs origines autorisées
     depends_on:
       - database
     restart: unless-stopped
@@ -38,11 +28,10 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
-    # Ajoutez les labels Traefik si nécessaire
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`www.saas.paulmulin.fr`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.frontend.rule=Host(`www.saas.paulmulin.fr`)"
+    #   - "traefik.http.services.frontend.loadbalancer.server.port=3000"
 
   database:
     env_file:
