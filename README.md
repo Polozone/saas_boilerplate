@@ -8,6 +8,14 @@ __To run the project in dev__:
 
 ``docker-compose up -d``
 
+to compile the ``api-types`` package and start defining your contracts in ``packages/api-types/src/contracts`` run :
+
+``cd packages/api-types``
+
+``tsc --watch``
+
+This will automatically match the data between your frontend & backend. See ts-rest documentation.
+
 if you just cloned the project: 
 ``docker exec -ti nodejs_backend "yarn prisma db push"`` >> will create the db if not exist (from schema.prisma), and generate your Prisma Client
 
