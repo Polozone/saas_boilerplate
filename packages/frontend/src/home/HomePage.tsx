@@ -103,7 +103,7 @@ export default function HomePage() {
             <div className="mt-16 mx-auto max-w-2xl lg:text-center">
               <h2 className="text-base/7 font-semibold text-indigo-600">Deploy faster</h2>
               <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
-                Marie Mulin is the best sister ever (and cooker)!
+                Everything you need to deploy your MVP!
               </p>
               <p className="mt-6 text-pretty text-lg/8 text-gray-600">
                 Don't waste time on the setup of your MVP. Simply git-clone the repository and start developing.
